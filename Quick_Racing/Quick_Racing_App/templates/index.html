@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>Home</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>QuickRacing</h1>
+
+            {% if user.first_name %}
+                <a href="/logout" class="logout"><button>Logout</button></a>
+                <p class="welcome">Welcome,  {{ user.first_name }}</p>
+            {% else %}
+                <a href="/loginreg" class="logout"><button>Log In or Register</button></a>
+            {% endif %}
+
+            <h2>Your one stop shop for racing news, forums, and products!</h2>
+
+            <div class="grid">
+
+				<figure class="frame">
+					<a href="/news"><img src="{% static 'images/news.jpg' %}"></a>
+					<a href="/news"><figcaption class="pic-text">News</figcaption></a>
+				</figure>
+	
+				<figure class="frame">
+					<a href="/forum"><img src="{% static 'images/forum.jpg' %}"></a>
+					<a href="/forum"><figcaption class="pic-text">Forums</figcaption></a>
+				</figure>
+				
+				<figure class="frame">
+					<a href= "/shop"><img src="{% static 'images/shop.jpg' %}"></a>
+					<a href="/shop"><figcaption class= "pic-text">Shop</figcaption></a>
+				</figure>
+
+			</div>
+
+        </div>
+    </body>
+</html>

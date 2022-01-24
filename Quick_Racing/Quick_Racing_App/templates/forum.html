@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>Forum</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>QuickRacing</h1>
+
+            <a href="/" class="logout"><button>Home</button></a>
+
+            {% if user.first_name %}
+                <a href="/logout" class="logout"><button>Logout</button></a>
+                <p class="welcome">Welcome,  {{ user.first_name }}</p>
+            {% else %}
+                <a href="/loginreg" class="logout"><button>Log In or Register</button></a>
+            {% endif %}
+
+            <h2>Your one stop shop for racing news, forums, and products!</h2>
+
+            <h2 class="heading">Forum</h2>
+            {% if user.first_name %}
+                <div class="create-post">
+                    <a href="/createpost"><button>New Post</button></a>
+                </div>
+            {% else %}
+                <div class="create-post">
+                    <p>Login to Creat a Post</p>
+                </div>
+            {% endif %}
+
+            <div class="table">
+                <table>
+                    <tr>
+						<th>Title</th>
+						<th>Category</th>
+						<th>Created By</th>
+						<th>Date Created</th>
+					</tr>
+                    {% for post in all_posts %}
+                    <tr>
+						<td><a href="/post/{{ post.id }}">{{ post.title }}</a></td>
+						<td>{{ post.category }}</td>
+						<td>{{ post.created_by.first_name }} {{ post.created_by.last_name }}</td>
+						<td>{{ post.created_at }}</td>
+					</tr>
+                    {% endfor %}
+				</table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>Purchased</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>QuickRacing</h1>
+
+            <a href="/" class="logout"><button>Home</button></a>
+
+            {% if user.first_name %}
+                <a href="/logout" class="logout"><button>Logout</button></a>
+                <p class="welcome">Welcome,  {{ user.first_name }}</p>
+            {% else %}
+                <a href="/loginreg" class="logout"><button>Log In or Register</button></a>
+            {% endif %}
+
+            <h2>Your one stop shop for racing news, forums, and products!</h2>
+
+            <h2 class="heading">Shop</h2>
+
+            <h3>Thank you for your purchase! Our staff will be in contact with you soon.</h3>
+
+            <div class="backshop">
+                <a href="/shop"><button>Back to Shop</button></a>
+            </div>
+        </div>
+    </body>
+</html>

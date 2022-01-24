@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>News</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>QuickRacing</h1>
+
+            <a href="/" class="logout"><button>Home</button></a>
+
+            {% if user.first_name %}
+                <a href="/logout" class="logout"><button>Logout</button></a>
+                <p class="welcome">Welcome,  {{ user.first_name }}</p>
+            {% else %}
+                <a href="/loginreg" class="logout"><button>Log In or Register</button></a>
+            {% endif %}
+
+            <h2>Your one stop shop for racing news, forums, and products!</h2>
+
+            <h2 class="heading">News</h2>
+
+            {% for article in all_articles %}
+                <div class="news">
+                    <h2 class="news-heading">{{ article.title }}</h2>
+                    <p class="news-p">{{ article.description }}</p>
+                    {% if user.first_name %}
+                        {% if user in article.users_who_like.all %}
+                        <p class="news-like">You liked this!</p>
+                        {% else %}
+                            <a href="/article/{{ article.id }}/like_article" class="news-like">Like!</a>
+                        {% endif %}
+                    {% else %}
+                        <p class="news-like">Login to Like</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <h3>You are caught up!</h3>
+
+            {% if user.first_name == "test" %}
+            <div class="create-article">
+                <a href="/createnews">Admin=Create News</a>
+            </div>
+            {% endif %} 
+        </div>
+    </body>
+</html>

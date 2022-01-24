@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>New Post</title>
+    </head>
+    <body>
+        <div class="wrapper-logreg">
+            <div class="wrapper_left">
+                <h1>New Forum Post</h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <form action="/create-post" method="POST" class="grid-forum">
+                    {% csrf_token %}
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+
+                    <label for="category">Category</label>
+                    <select name="category" id="category">
+                        <option value="Dirt Racing">Dirt Racing</option>
+                        <option value="Equipment">Equipment</option>
+                        <option value="Safety">Safety</option>
+                        <option value="Street Cars">Street Cars</option>
+                    </select>
+                        
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" required>
+
+                    <input type="submit" value ="Create Post" class="btn">
+                </form>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

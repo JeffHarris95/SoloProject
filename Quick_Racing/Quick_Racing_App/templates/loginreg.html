@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <title>Login and Registration</title>
+    </head>
+    <body>
+        <div class="wrapper-logreg">
+            <div class="wrapper_left">
+                <h1>Registration</h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <form action="/register" method="POST" class="grid-forum">
+                    {% csrf_token %}
+                    <label for="first_name">First name</label>
+                    <input type="text" name="first_name" id="first_name" required>
+                        
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" required>
+                        
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                        
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" required>
+
+                    <label for="password_confirm">Confrim PW</label>
+                    <input type="text" name="password_confirm" id="password_confirm" required>
+
+                    <input type="submit" value ="Register" class="btn">
+                </form>
+            </div>
+
+            <div class="wrapper_right">
+                <h1>Login</h1>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <form action="/login" method="POST" class="grid-forum">
+                    {% csrf_token %}
+                        
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                        
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" required>
+
+                    <input type="submit" value ="Login" class="btn">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
